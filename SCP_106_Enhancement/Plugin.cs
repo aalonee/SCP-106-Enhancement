@@ -25,14 +25,14 @@ namespace scp106
 
         public override void OnEnabled()
         {
-            Log.Info("Plugin enabled");
+            base.OnEnabled();
             Exiled.Events.Handlers.Player.Hurting += OnAttack;
             Exiled.Events.Handlers.Player.EscapingPocketDimension += OnEscaping;
         }
 
         public override void OnDisabled()
         {
-            Log.Info("Plugin disabled");
+            base.OnDisabled();
             Exiled.Events.Handlers.Player.Hurting -= OnAttack;
             Exiled.Events.Handlers.Player.EscapingPocketDimension -= OnEscaping;
         }
