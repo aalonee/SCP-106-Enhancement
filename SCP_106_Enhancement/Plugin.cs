@@ -33,6 +33,7 @@ namespace scp106
         public override void OnDisabled()
         {
             Log.Info("Plugin disabled");
+            Exiled.Events.Handlers.Player.EscapingPocketDimension -= OnEscaping;
         }
 
         public void OnEscaping(EscapingPocketDimensionEventArgs ev)
@@ -42,10 +43,13 @@ namespace scp106
 
         public void OnAttack(HurtingEventArgs ev)
         {
-            if (ev.Attacker.Role == RoleTypeId.Scp106)
+            if (ev.Attacker != null && ev.Player != null)
             {
-                ev.Player.ShowHint(Config.CaughtHintText.Replace("%attacker%", ev.Attacker.Nickname), Config.CaughtHintDuration);
-                ev.Player.EnableEffect(EffectType.Corroding);
+                if (ev.Attacker.Role == RoleTypeId.Scp106)
+                {
+                    ev.Player.ShowHint(Config.CaughtHintText.Replace("%attacker%", ev.Attacker.Nickname), Config.CaughtHintDuration);
+                    ev.Player.EnableEffect(EffectType.Corroding);
+                }
             }
         }
     }
